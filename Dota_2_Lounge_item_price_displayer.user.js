@@ -6,6 +6,8 @@
 // @description Displays an item's lowest price offer from the Steam community market and also provides a helper to copy an item's name by clicking the panel under it. Based on the "Steam Market Price Matcher" script by tomatolicious available at http://userscripts.org/scripts/show/154071
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     http://dota2lounge.com/*
+// @updateURL   http://userscripts.org/scripts/source/182588.user.js
+// @downloadURL http://userscripts.org/scripts/source/182588.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
 // ==/UserScript==
