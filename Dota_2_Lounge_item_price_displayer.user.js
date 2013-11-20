@@ -3,7 +3,7 @@
 // @namespace   http://www.enygma.ro
 // @version     1.0
 // @author      Enygma
-// @description Displays an item's lowest price offer from the Steam community market and also provides a helper to copy an item's name by clicking the panel under it. Based on the "Steam Market Price Matcher" script by tomatolicious available at http://userscripts.org/scripts/show/154071
+// @description Displays an item's lowest price offer from the Steam community market and also provides a helper to copy an item's name by clicking the panel under it. Based on the "Steam Market Price Matcher" script by tomatolicious available at http://userscripts.org/scripts/source/154071.user.js
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     http://dota2lounge.com/*
 // @updateURL   http://userscripts.org/scripts/source/182588.user.js
@@ -21,6 +21,10 @@ var initialize = function() {
     var rightItemList = document.querySelector("#rightlist #itemlist");
     if (rightItemList) {
         attachMutationObserver(rightItemList);
+    }
+    var offerPanel = document.querySelector("#messages #offer");
+    if (offerPanel) {
+        attachMutationObserver(offerPanel);
     }
 }
 
@@ -45,6 +49,10 @@ var attachExtraPanelsAndListeners = function(itemNamePanels) {
 var attachMutationObserver = function(target) {     
     // create an observer instance
     var observer = new MutationObserver(function(mutations) {
+        // we`re intereste only in mutations that add nodes. This skips the mutation introduced by the "Add item to offer" button's removal.
+        if (mutations.length == 1 && mutations[0].removedNodes.length > 0) {
+            return;
+        }
         // when the mutation happens, augment the new items with price info and etc.
         itemNamePanels = target.querySelectorAll(".item .name");
         attachExtraPanelsAndListeners(itemNamePanels);
@@ -78,7 +86,7 @@ var getLowestPriceHandler = function() {
             var priceWithFee = "<span class='" + (match ?
                 "itemMarketable'>" + match[1] :
                 "itemNotMarketable'>Not Marketable")
-                + "</span>"; 
+                + "</span>";
             match = lowestPriceWithoutFeeRegExp.exec(httpResponse);
             var priceWithoutFee = match ? match[1] + " - without fee (seller receives)" : ""; 
             itemNameElement.querySelector(".scriptStatus").innerHTML = "<span title='" + priceWithoutFee + "'>" + priceWithFee + "</span>";
