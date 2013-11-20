@@ -49,7 +49,7 @@ var attachExtraPanelsAndListeners = function(itemNamePanels) {
 var attachMutationObserver = function(target) {     
     // create an observer instance
     var observer = new MutationObserver(function(mutations) {
-        // we`re intereste only in mutations that add nodes. This skips the mutation introduced by the "Add item to offer" button's removal.
+        // we`re intereste only in mutations that add nodes. This skips the mutation introduced by the "Add item to offer" button's removal
         if (mutations.length == 1 && mutations[0].removedNodes.length > 0) {
             return;
         }
@@ -58,7 +58,7 @@ var attachMutationObserver = function(target) {
         attachExtraPanelsAndListeners(itemNamePanels);
     });
      
-    // configuration of the observer:
+    // configuration of the observer
     var config = { childList: true };
      
     // pass in the target node, as well as the observer options
@@ -100,7 +100,7 @@ var lowestPriceWithoutFeeRegExp = /<span class="market_listing_price market_list
 
 // event handler to facilitate copying an item's name
 var copyItemNameHandler = function(event) {
-    // stop the element's parent (item) from getting the click event. This stops the item from being selected.
+    // stop the element's parent (item) from getting the click event. This stops the item from being selected
     event.stopPropagation()
     // make sure we select the item name element
     var itemNameElement = event.target;
