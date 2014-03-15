@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name        Dota 2 Lounge item price displayer
 // @namespace   http://www.enygma.ro
-// @version     1.1
+// @version     2.0
 // @author      Enygma
-// @description Displays an item's lowest price offer from the Steam community market and also provides a helper to copy an item's name by clicking the panel under it. Based on the "Steam Market Price Matcher" script by tomatolicious available at http://userscripts.org/scripts/source/154071.user.js
+// @description Displays an item's lowest price offer from the Steam community market, provides a helper popup to copy an item's name by clicking the panel under it, and adds a button to quickly open the Steam market listing for an item. Inspired by the "Steam Market Price Matcher" script by tomatolicious available at http://userscripts.org/scripts/source/154071.user.js
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     http://dota2lounge.com/*
 // @updateURL   http://userscripts.org/scripts/source/182588.user.js
@@ -12,74 +12,84 @@
 // @grant       GM_addStyle
 // ==/UserScript==
 
-// initialize the script for the items on the page
-var initialize = function() {
-    // find each item's name panel/slot
-    var itemNamePanels = document.querySelectorAll(".item .name");
-    attachExtraPanelsAndListeners(itemNamePanels);
-    // watch the right list of items for changes, when it exists
-    var rightItemList = document.querySelector("#rightlist #itemlist");
-    if (rightItemList) {
-        attachMutationObserver(rightItemList);
-    }
-    var offerPanel = document.querySelector("#messages #offer");
-    if (offerPanel) {
-        attachMutationObserver(offerPanel);
-    }
-}
-
-// add to each item's name panel an extra panel that contains the price information and a click handler to facilitate copying the item's name 
-var attachExtraPanelsAndListeners = function(itemNamePanels) {
-    for (var i = 0, length = itemNamePanels.length; i < length; i++) {
-        var itemNamePanel = itemNamePanels[i];
-        // create our own panel to append..       
-        var extraPanel = document.createElement('div');
-        extraPanel.innerHTML = "<span class='scriptStatus'>Ready</span>";
-        extraPanel.setAttribute("class", "extraPanel");
-        // ..and do so
-        itemNamePanel.appendChild(extraPanel);
-        // set mouseover event listener on the item
-        itemNamePanel.parentNode.addEventListener("mouseover", getLowestPriceHandler, false);
-        // set click event handler for the item's name panel so that the item name can be copied to the clipboard easier
-        itemNamePanel.addEventListener("click", copyItemNameHandler, false);
-    }
-}
-
-// attach a mutation observer on the target item container
-var attachMutationObserver = function(target) {     
-    // create an observer instance
-    var observer = new MutationObserver(function(mutations) {
-        // we`re intereste only in mutations that add nodes. This skips the mutation introduced by the "Add item to offer" button's removal
-        if (mutations.length == 1 && mutations[0].removedNodes.length > 0) {
-            return;
-        }
-        // when the mutation happens, augment the new items with price info and etc.
-        itemNamePanels = target.querySelectorAll(".item .name");
-        attachExtraPanelsAndListeners(itemNamePanels);
-    });
-     
-    // configuration of the observer
-    var config = { childList: true };
-     
-    // pass in the target node, as well as the observer options
-    observer.observe(target, config);
-}
-
-// event handler to grab the price
-var getLowestPriceHandler = function() {
-    var itemNameElement = this.querySelector(".name");
-    // don`t try to get the price if we've already retrieved it
-    if (itemNameElement.querySelector(".scriptStatus").innerHTML != "Ready") {
+// Main event listener for hovering items.
+document.addEventListener("mouseover", function (event) {
+    var itemElement = getItemElement(event);
+    if (!itemElement) {
         return;
     }
-    var theItem = itemNameElement.querySelector("b").innerHTML.trim();
-    var theItemString = encodeURIComponent(theItem);
-    // from Steam's community market website
-    var appID = 570;
+
+    attachExtraPanelAndListeners(itemElement);
+    getLowestPrice(itemElement);
+})
+
+// Get the hovered item, if any.
+var getItemElement = function(mouseEvent) {
+    var targetElement = mouseEvent.target;
+    var itemElement = null;
+
+    // Hover either the item element or its picture (child element).
+    if (hasClass(targetElement, "item")) {
+	    itemElement = targetElement;
+    } else if (hasClass(targetElement.parentNode, "item")) {
+	    itemElement = targetElement.parentNode;
+    }
+
+    // Avoid returning empty item slots.
+    if (itemElement && !itemElement.querySelector(".name")) {
+        itemElement = null;
+    }
+
+    return itemElement;
+}
+
+// Add to the specified item element an extra panel that contains the price information and a click handler to facilitate copying the item's name 
+var attachExtraPanelAndListeners = function(itemElement) {
+    var itemNamePanel = itemElement.querySelector(".name");
+    // If the extra panel already exists, stop here.
+    var extraPanel = itemNamePanel.querySelector(".extraPanel");
+    if (extraPanel) {
+        return;
+    }
+
+    // Otherwise, create our own panel to append... 
+    extraPanel = document.createElement('div');
+    extraPanel.innerHTML = "<span class='scriptStatus'>Ready</span>" +
+        "<button class='extraButton refreshButton' title='Refresh'/>" +
+        "<button class='extraButton steamMarketListingsButton' title='Show listings for the item on Steam Market'/>";
+    extraPanel.setAttribute("class", "extraPanel");
+
+    // ...and append it.
+    itemNamePanel.appendChild(extraPanel);
+    // Set click event handler for the item's name panel so that the item name can be copied to the clipboard easier.
+    itemNamePanel.addEventListener("click", copyItemNameHandler, false);
+    // Set click event handler for the refresh button that re-fetches the item's price.
+    var refreshButton = extraPanel.querySelector(".refreshButton");
+    refreshButton.addEventListener("click", function(event) {
+        event.stopPropagation()
+        getLowestPrice(itemElement, true);
+    }, false);
+    // Set click event handler for the Steam market listings button that opens in a new tab.
+    var steamMarketListingsButton = extraPanel.querySelector(".steamMarketListingsButton");
+    steamMarketListingsButton.addEventListener("click", function(event) {
+        event.stopPropagation()
+        showSteamMarketListings(itemElement);
+    }, false);
+}
+
+// Get the lowest price for an item from the Steam market.
+var getLowestPrice = function(itemElement, override) {
+    var itemNameElement = itemElement.querySelector(".name");
+    // Don`t try to get the price if we've already retrieved it.
+    if (!override && itemNameElement.querySelector(".scriptStatus").innerHTML != "Ready") {
+        return;
+    }
+
     itemNameElement.querySelector(".scriptStatus").innerHTML = "Loading...";
+    var url = getSteamMarketListingsURL(itemElement);
     GM_xmlhttpRequest({
         method: "GET",
-        url: "http://steamcommunity.com/market/listings/" + appID + "/" + theItemString + "/",
+        url: url,
         onload: function (response) {
             var httpResponse = response.responseText;
             var match = lowestPriceWithFeeRegExp.exec(httpResponse);
@@ -94,31 +104,55 @@ var getLowestPriceHandler = function() {
     });
 }
 
-// cached RegExps used to read the item's value from the Steam page.
+// Computes the URL used to access the Steam market listings for a given item.
+var getSteamMarketListingsURL = function(itemElement) {
+    var itemNameElement = itemElement.querySelector(".name");
+    var itemName = itemNameElement.querySelector("b").innerHTML.trim();
+    var itemNameEncoded = encodeURIComponent(itemName);
+    // Dota2 app ID on Steam's community market website.
+    var appID = 570;
+    var url = "http://steamcommunity.com/market/listings/" + appID + "/" + itemNameEncoded + "/";
+
+    return url;
+}
+
+// Cached RegExps used to read the item's value from the Steam page.
 var lowestPriceWithFeeRegExp = /<span class="market_listing_price market_listing_price_with_fee">\s*(.*?)\s*<\/span>/i;
 var lowestPriceWithoutFeeRegExp = /<span class="market_listing_price market_listing_price_without_fee">\s*(.*?)\s*<\/span>/i;
 
-// event handler to facilitate copying an item's name
+// Event handler to facilitate copying an item's name.
 var copyItemNameHandler = function(event) {
-    // stop the element's parent (item) from getting the click event. This stops the item from being selected
+    // Stop the element's parent (item) from getting the click event. This stops the item from being selected.
     event.stopPropagation()
-    // make sure we select the item name element
+    // Make sure we select the item name element.
     var itemNameElement = event.target;
     while (!hasClass(itemNameElement, "name")) {
         itemNameElement = itemNameElement.parentNode;
     }
-    // get and display the item's name
+    // Get and display the item's name.
     var itemName = itemNameElement.querySelector("b").innerHTML.trim();
     window.prompt("Press CTRL+C to copy the item's name:", itemName);
 }
 
-// helper method to check if an element has the specified class name
-var hasClass = function(element, cls) {
-    return (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
+// Opens a new tab with the Steam market listings of a given item.
+var showSteamMarketListings = function(itemElement) {
+    var url = getSteamMarketListingsURL(itemElement);
+    var win = window.open(url, "_blank");
+    if (win) {
+        //Browser has allowed it to be opened
+        win.focus();
+    } else {
+        //Broswer has blocked it
+        alert('Please allow popups for this site in order to open the Steam market listings.');
+    }
 }
 
-// style
-GM_addStyle(".itemNotMarketable { color : red } .itemMarketable { color: green }");
+// Helper method to check if an element has the specified class name.
+var hasClass = function(element, cls) {
+    return element && (" " + element.className + " ").indexOf( " " + cls + " " ) > -1;
+}
 
-// initialize the script once the page has finished loading
-window.onload = initialize;
+// Style.
+GM_addStyle(".itemNotMarketable { color : red } .itemMarketable { color: green } .extraButton { margin-left: 0.3em; vertical-align: top; margin-top: -0.1em; border: 0; padding: 0; width: 16px; height: 16px; }");
+GM_addStyle(".refreshButton { background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABOUlEQVQ4jc2RsUoDQRCGv32CXECzdjaWRiOCVSA+RdqAL6BFesUXOPUFbCWKJ2thkcRgxCa3cJUEQuCwExRjCi1sxiKXsElO6wz81e58888/sPhlESwxlhNaeP/+zRnO/wCMNaBDIbVZG/ztppLcLYdpgK3uSFgGc05WAnbX7pTcD5FCQ8lyMDOlQ4mQaO8lcRI6Q7wATxsGR32k9YUc9RFtiL1gZsoTq1jk7D3JxLEeFNtKLj6ZqNhWkppHSOvxO3GRFlb3J3mc2VEb/I2mktM3Jtp5UKINgUuProYJoMO+C8jWyGhDXO0hl0Ok2hutma2RcR1UsMjx6ySoA9fJkqGUryu5+UDydSW5azbn1wiJyjFSjp3bO4lrg19opJzacZEhJMIi688juYBkFT+9eRpUGYOmbr6Q9QvwBrFqSdh8NgAAAABJRU5ErkJggg==) no-repeat left center; }");
+GM_addStyle(".steamMarketListingsButton { background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sIBhUuIxK7S5QAAAFbSURBVDjLY7x27QaDoYGhOQMDwwkGHEBEVJiBgYGBwcLalOHE0dMMb16/ZWBgYGA4f+E8IwM7G+d/fDg4LPD/8VNH/yOD46eO/ufh5P3Pzsb5H68B0tIycM08nLxwDDOEKANgmheumf3//////xeumQ0XJ2hAcFgg3ABkAOPHRsf9Z2LAA0rr8+HsRWvnwGl+IX6EIly29/T0wG3ctm0bShjk5mcjvBAcFojT7/hAbHQcxACYQElx6f+S4tL/e/bvxKtx4rT+/9LSMnDLGLApkpaWwTCopLgUq1cZcNkE88bxU0dRbETHTLDQxQUcbFzgSRcbYEmLymPYE3qYIbsqiWFq2zyGyOgIuOTJawcZCAEWBgYGhlWrV0PieMlCBhkZWQYGBgaGtbuWMKyZt5U4A2CGyCvKMaxZv5KBgYGBYc28DQzLVywnaADjlcvXGYyNjf4zkAHOnj3HDAAt54OFwXNyhAAAAABJRU5ErkJggg==) no-repeat left center; }");
