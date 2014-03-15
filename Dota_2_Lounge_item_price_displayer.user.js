@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Dota 2 Lounge item price displayer
 // @namespace   http://www.enygma.ro
-// @version     2.1
+// @version     2.0
 // @author      Enygma
 // @description Displays an item's lowest price offer from the Steam community market, provides a helper popup to copy an item's name by clicking the panel under it, and adds a button to quickly open the Steam market listing for an item. Inspired by the "Steam Market Price Matcher" script by tomatolicious available at http://userscripts.org/scripts/source/154071.user.js
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
