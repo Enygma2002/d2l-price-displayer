@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name        Dota 2 Lounge item price displayer
 // @namespace   http://www.enygma.ro
-// @version     2.0
+// @version     2.1
 // @author      Enygma
 // @description Displays an item's lowest price offer from the Steam community market, provides a helper popup to copy an item's name by clicking the panel under it, and adds a button to quickly open the Steam market listing for an item. Inspired by the "Steam Market Price Matcher" script by tomatolicious available at http://userscripts.org/scripts/source/154071.user.js
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @include     http://dota2lounge.com/*
+// @include     /^http(s)?://(www.)?dota2lounge.com/*/
 // @updateURL   http://userscripts.org/scripts/source/182588.user.js
 // @downloadURL http://userscripts.org/scripts/source/182588.user.js
 // @grant       GM_xmlhttpRequest
@@ -55,8 +55,8 @@ var attachExtraPanelAndListeners = function(itemElement) {
     // Otherwise, create our own panel to append... 
     extraPanel = document.createElement('div');
     extraPanel.innerHTML = "<span class='scriptStatus'>Ready</span>" +
-        "<button class='extraButton refreshButton' title='Refresh'/>" +
-        "<button class='extraButton steamMarketListingsButton' title='Show listings for the item on Steam Market'/>";
+        "<button type='button' class='extraButton refreshButton' title='Refresh'/>" +
+        "<button type='button' class='extraButton steamMarketListingsButton' title='Show listings for the item on Steam Market'/>";
     extraPanel.setAttribute("class", "extraPanel");
 
     // ...and append it.
