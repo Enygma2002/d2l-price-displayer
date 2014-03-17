@@ -20,7 +20,7 @@ if (document.URL.match(/^http(s)?:\/\/(www.)?dota2lounge.com\//)) {
 
     // Generic item placeholder names used by the d2l website and not existing in the Steam Market.
     genericItemPlaceholderNames = ["Offers", "Any Common", "Any Uncommon", "Any Rare", "Any Mythical", "Any Legendary",
-                                       "Any Ancient", "Any Immortal", "Real Money", "+ More", "Any Set"];
+                                   "Any Ancient", "Any Immortal", "Real Money", "+ More", "Any Set"];
 } else if (document.URL.match(/^http(s)?:\/\/(www.)?csgolounge.com\//)) {
     // CS:GO app ID on Steam's community market website.
     appID = 730;
@@ -47,9 +47,9 @@ var getItemElement = function(mouseEvent) {
 
     // Hover either the item element or its picture (child element).
     if (hasClass(targetElement, "item")) {
-	    itemElement = targetElement;
+        itemElement = targetElement;
     } else if (hasClass(targetElement.parentNode, "item")) {
-	    itemElement = targetElement.parentNode;
+        itemElement = targetElement.parentNode;
     } else {
         return null;
     }
@@ -92,13 +92,13 @@ var attachExtraPanelAndListeners = function(itemElement) {
     // Set click event handler for the refresh button that re-fetches the item's price.
     var refreshButton = extraPanel.querySelector(".refreshButton");
     refreshButton.addEventListener("click", function(event) {
-        event.stopPropagation()
+        event.stopPropagation();
         getLowestPrice(itemElement, true);
     }, false);
     // Set click event handler for the Steam market listings button that opens in a new tab.
     var steamMarketListingsButton = extraPanel.querySelector(".steamMarketListingsButton");
     steamMarketListingsButton.addEventListener("click", function(event) {
-        event.stopPropagation()
+        event.stopPropagation();
         showSteamMarketListings(itemElement);
     }, false);
 }
@@ -121,8 +121,8 @@ var getLowestPrice = function(itemElement, override) {
             var match = lowestPriceWithFeeRegExp.exec(httpResponse);
             var priceWithFee = "<span class='" + (match ?
                 "itemMarketable'>" + match[1] :
-                "itemNotMarketable'>Not Marketable")
-                + "</span>";
+                "itemNotMarketable'>Not Marketable") +
+                "</span>";
             match = lowestPriceWithoutFeeRegExp.exec(httpResponse);
             var priceWithoutFee = match ? match[1] + " - without fee (seller receives)" : ""; 
             itemNameElement.querySelector(".scriptStatus").innerHTML = "<span title='" + priceWithoutFee + "'>" + priceWithFee + "</span>";
