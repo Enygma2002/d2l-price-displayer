@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        Dota 2 & CS:GO Lounge item price displayer
+// @name        Dota 2 & CSGO Lounge item price displayer
 // @namespace   http://www.enygma.ro
 // @version     2.2
 // @author      Enygma
