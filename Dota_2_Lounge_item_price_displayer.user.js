@@ -1,25 +1,33 @@
 // ==UserScript==
-// @name        Dota 2 Lounge item price displayer
+// @name        Dota 2 & CS:GO Lounge item price displayer
 // @namespace   http://www.enygma.ro
 // @version     2.2
 // @author      Enygma
-// @description Displays an item's lowest price offer from the Steam community market, provides a helper popup to copy an item's name by clicking the panel under it, and adds a button to quickly open the Steam market listing for an item. Inspired by the "Steam Market Price Matcher" script by tomatolicious available at http://userscripts.org/scripts/source/154071.user.js
+// @description Displays an item's lowest price offer from the Steam Community Market and helps to copy an item's name or quickly open the Steam Market listing for an item.
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @include     /^http(s)?://(www.)?dota2lounge.com/*/
+// @include     /^http(s)?://(www.)?dota2lounge.com//
+// @include     /^http(s)?://(www.)?csgolounge.com//
 // @updateURL   http://userscripts.org/scripts/source/182588.user.js
 // @downloadURL http://userscripts.org/scripts/source/182588.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
 // ==/UserScript==
 
-// ==Script Configuration==
-// Dota2 app ID on Steam's community market website.
-var appID = 570;
+// Determine on which site is the script being executed (dota2lounge or csgolounge)
+if (document.URL.match(/^http(s)?:\/\/(www.)?dota2lounge.com\//)) {
+    // Dota2 app ID on Steam's community market website.
+    appID = 570;
 
-// Generic item placeholder names used by the d2l website and not existing in the Steam Market.
-var genericItemPlaceholderNames = ["Offers", "Any Common", "Any Uncommon", "Any Rare", "Any Mythical", "Any Legendary",
-                                   "Any Ancient", "Any Immortal", "Real Money", "+ More", "Any Set"];
-// ==/Script Configuration==
+    // Generic item placeholder names used by the d2l website and not existing in the Steam Market.
+    genericItemPlaceholderNames = ["Offers", "Any Common", "Any Uncommon", "Any Rare", "Any Mythical", "Any Legendary",
+                                       "Any Ancient", "Any Immortal", "Real Money", "+ More", "Any Set"];
+} else if (document.URL.match(/^http(s)?:\/\/(www.)?csgolounge.com\//)) {
+    // CS:GO app ID on Steam's community market website.
+    appID = 730;
+
+    // Generic item placeholder names used by the csgolounge website and not existing in the Steam Market.
+    genericItemPlaceholderNames = ["Any Offers", "Real Money", "Dota Items", "TF2 Items"];
+}
 
 // Main event listener for hovering items.
 document.addEventListener("mouseover", function (event) {
@@ -52,7 +60,7 @@ var getItemElement = function(mouseEvent) {
         return null;
     }
 
-    // Avoid returning d2l generic item placeholders.
+    // Avoid returning generic item placeholders.
     var itemName = getItemName(itemElement);
     if (genericItemPlaceholderNames.indexOf(itemName) > -1) {
         return null;
@@ -178,7 +186,7 @@ var showSteamMarketListings = function(itemElement) {
         win.focus();
     } else {
         // Broswer has blocked it.
-        alert('Please allow popups for this site in order to open the Steam market listings.');
+        alert("Please allow popups for this site in order to open the Steam market listings.");
     }
 }
 
