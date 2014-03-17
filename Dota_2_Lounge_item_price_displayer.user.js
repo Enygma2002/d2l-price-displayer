@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Dota 2 Lounge item price displayer
 // @namespace   http://www.enygma.ro
-// @version     2.1
+// @version     2.2
 // @author      Enygma
 // @description Displays an item's lowest price offer from the Steam community market, provides a helper popup to copy an item's name by clicking the panel under it, and adds a button to quickly open the Steam market listing for an item. Inspired by the "Steam Market Price Matcher" script by tomatolicious available at http://userscripts.org/scripts/source/154071.user.js
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
@@ -11,6 +11,15 @@
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
 // ==/UserScript==
+
+// ==Script Configuration==
+// Dota2 app ID on Steam's community market website.
+var appID = 570;
+
+// Generic item placeholder names used by the d2l website and not existing in the Steam Market.
+var genericItemPlaceholderNames = ["Offers", "Any Common", "Any Uncommon", "Any Rare", "Any Mythical", "Any Legendary",
+                                   "Any Ancient", "Any Immortal", "Real Money", "+ More", "Any Set"];
+// ==/Script Configuration==
 
 // Main event listener for hovering items.
 document.addEventListener("mouseover", function (event) {
@@ -22,10 +31,6 @@ document.addEventListener("mouseover", function (event) {
     attachExtraPanelAndListeners(itemElement);
     getLowestPrice(itemElement);
 })
-
-// Generic item placeholder names used by the d2l website and not existing in the Steam Market.
-var genericItemPlaceholderNames = ["Offers", "Any Common", "Any Uncommon", "Any Rare", "Any Mythical", "Any Legendary",
-                                   "Any Ancient", "Any Immortal", "Real Money", "+ More", "Any Set"];
 
 // Get the hovered item, if any.
 var getItemElement = function(mouseEvent) {
@@ -121,8 +126,6 @@ var getLowestPrice = function(itemElement, override) {
 var getSteamMarketListingsURL = function(itemElement) {
     var itemName = getItemName(itemElement);
     var itemNameEncoded = encodeURIComponent(itemName);
-    // Dota2 app ID on Steam's community market website.
-    var appID = 570;
     var url = "http://steamcommunity.com/market/listings/" + appID + "/" + itemNameEncoded + "/";
 
     return url;
