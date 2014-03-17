@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Dota 2 Lounge item price displayer
 // @namespace   http://www.enygma.ro
-// @version     2.0
+// @version     2.1
 // @author      Enygma
 // @description Displays an item's lowest price offer from the Steam community market, provides a helper popup to copy an item's name by clicking the panel under it, and adds a button to quickly open the Steam market listing for an item. Inspired by the "Steam Market Price Matcher" script by tomatolicious available at http://userscripts.org/scripts/source/154071.user.js
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
@@ -23,6 +23,10 @@ document.addEventListener("mouseover", function (event) {
     getLowestPrice(itemElement);
 })
 
+// Generic item placeholder names used by the d2l website and not existing in the Steam Market.
+var genericItemPlaceholderNames = ["Offers", "Any Common", "Any Uncommon", "Any Rare", "Any Mythical", "Any Legendary",
+                                   "Any Ancient", "Any Immortal", "Real Money", "+ More", "Any Set"];
+
 // Get the hovered item, if any.
 var getItemElement = function(mouseEvent) {
     var targetElement = mouseEvent.target;
@@ -33,11 +37,20 @@ var getItemElement = function(mouseEvent) {
 	    itemElement = targetElement;
     } else if (hasClass(targetElement.parentNode, "item")) {
 	    itemElement = targetElement.parentNode;
+    } else {
+        return null;
     }
 
     // Avoid returning empty item slots.
-    if (itemElement && !itemElement.querySelector(".name")) {
-        itemElement = null;
+    var itemNameElement = itemElement.querySelector(".name");
+    if (!itemNameElement) {
+        return null;
+    }
+
+    // Avoid returning d2l generic item placeholders.
+    var itemName = getItemName(itemElement);
+    if (genericItemPlaceholderNames.indexOf(itemName) > -1) {
+        return null;
     }
 
     return itemElement;
@@ -106,8 +119,7 @@ var getLowestPrice = function(itemElement, override) {
 
 // Computes the URL used to access the Steam market listings for a given item.
 var getSteamMarketListingsURL = function(itemElement) {
-    var itemNameElement = itemElement.querySelector(".name");
-    var itemName = itemNameElement.querySelector("b").innerHTML.trim();
+    var itemName = getItemName(itemElement);
     var itemNameEncoded = encodeURIComponent(itemName);
     // Dota2 app ID on Steam's community market website.
     var appID = 570;
@@ -116,33 +128,53 @@ var getSteamMarketListingsURL = function(itemElement) {
     return url;
 }
 
+// Extract the item's name from a DOM item element.
+var getItemName = function(itemElement) {
+    var itemNameElement = itemElement.querySelector(".name");
+    var itemName = itemNameElement.querySelector("b").innerHTML.trim();
+
+    return itemName;
+}
+
 // Cached RegExps used to read the item's value from the Steam page.
 var lowestPriceWithFeeRegExp = /<span class="market_listing_price market_listing_price_with_fee">\s*(.*?)\s*<\/span>/i;
 var lowestPriceWithoutFeeRegExp = /<span class="market_listing_price market_listing_price_without_fee">\s*(.*?)\s*<\/span>/i;
 
 // Event handler to facilitate copying an item's name.
 var copyItemNameHandler = function(event) {
+    var clickedElement = event.target;
+
+    // Avoid executing this handler if the "Remove item" button is clicked in a trade.
+    if (excludedTags.indexOf(clickedElement.tagName) > -1 || excludedTags.indexOf(clickedElement.parentNode.tagName) > -1) {
+        return;
+    }
+
     // Stop the element's parent (item) from getting the click event. This stops the item from being selected.
-    event.stopPropagation()
+    event.stopPropagation();
+
     // Make sure we select the item name element.
-    var itemNameElement = event.target;
+    var itemNameElement = clickedElement;
     while (!hasClass(itemNameElement, "name")) {
         itemNameElement = itemNameElement.parentNode;
     }
+
     // Get and display the item's name.
     var itemName = itemNameElement.querySelector("b").innerHTML.trim();
     window.prompt("Press CTRL+C to copy the item's name:", itemName);
 }
+
+// Tags that, if clicked on in an item name panel, should not execute the copyItemNameHandler.
+var excludedTags = ["A", "IMG"];
 
 // Opens a new tab with the Steam market listings of a given item.
 var showSteamMarketListings = function(itemElement) {
     var url = getSteamMarketListingsURL(itemElement);
     var win = window.open(url, "_blank");
     if (win) {
-        //Browser has allowed it to be opened
+        // Browser has allowed it to be opened.
         win.focus();
     } else {
-        //Broswer has blocked it
+        // Broswer has blocked it.
         alert('Please allow popups for this site in order to open the Steam market listings.');
     }
 }
