@@ -34,6 +34,7 @@ Hope you like it ;)
 _Credits:_ This script is inspired by the [Steam Market Price Matcher](http://userscripts.org/scripts/show/154071) script by tomatolicious.
 
 **Google Chrome users:** In case you`re having issues running or installing the script manually with Google Chrome, try installing the [Tampermonkey extension](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) and install the script there. This way the script should be able to run nicely and you will also benefit from automatic updates when new version are available.
+
 **Firefox users:** You will obviously need the [Greasemonkey addon] (https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) to be able to install and use this script.
 
 # Donations:
