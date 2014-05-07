@@ -69,3 +69,7 @@ Now also displaying item prices for items in your backpack that are displayed wh
 
 **Nov 8, 2013**
 Initial release
+
+#Views counter:
+![counter powered by www.reliablecounter.com](http://www.reliablecounter.com/count.php?page=https://github.com/Enygma2002/d2l-price-displayer&digit=style/plain/5/&reloads=1)
+![](https://nojsstats.appspot.com/UA-50693946-4/github.com)
