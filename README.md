@@ -45,16 +45,20 @@ If this script saved your life and you want to show your love and support to its
 # Updates:
 
 **May 6, 2014**
+
 Accepting donations! The script seems to have caught on. I am very happy with that and, if anyone is interested in donating, it is now possible. Thank you for your support!
 
 **Mar 17, 2014**
+
 [www.csgolounge.com](http://www.csgolounge.com) is now supported!
 
 **Mar 17, 2014**
+
 * Fixed the "Remove item" behavior when clicked that was causing the copy-item-name popup to also show.
 * Skipping the d2l generic items ("Any Common", "Any Rare", etc.) since they don`t exist on the Steam Market and should not be handled by the script.
 
 **Mar 16, 2014**
+
 Version 2.0
 * Rewrote the way items are augmented with price information and extra buttons and, as a result:
   * The script now works for all views of the site, including backpack, profile, etc.
@@ -65,9 +69,11 @@ Version 2.0
 * Fixed script not loading if the website is opened with "www"
 
 **Nov 20, 2013**
+
 Now also displaying item prices for items in your backpack that are displayed when when you press "Add items to offer" in the messages section of an active trade.
 
 **Nov 8, 2013**
+
 Initial release
 
 #Views counter:
