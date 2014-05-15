@@ -3,7 +3,7 @@ Dota 2 & CS:GO Lounge item price displayer
 
 <a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/">Greasemonkey</a> userscript for the <a href="http://dota2lounge.com">dota2lounge.com</a> and <a href="http://csgolounge.com">csgolounge.com</a> websites that displays an item's lowest price offer from the <a href="http://steamcommunity.com/market/">Steam Community Market</a> and helps to copy an item's name or to quickly open the market listings for an item.
 
-_Note:_ This script was originally published on [userscripts.org](http://userscripts.org/scripts/show/182588), but due to the availability issues the site has been having lately, I have also published it on [openuserjs.org](https://openuserjs.org/scripts/enygma/httpwww.enygma.ro/Dota_2_CSGO_Lounge_item_price_displayer), on [greasyfork.org](https://greasyfork.org/scripts/666-dota-2-csgo-lounge-item-price-displayer) and here, obviously. Whatever place you prefer, please enjoy it :)
+_Note:_ This script was originally published on [userscripts.org](http://userscripts.org:8080/scripts/show/182588), but due to the availability issues the site has been having lately, I have also published it on [openuserjs.org](https://openuserjs.org/scripts/enygma/httpwww.enygma.ro/Dota_2_CSGO_Lounge_item_price_displayer), on [greasyfork.org](https://greasyfork.org/scripts/666-dota-2-csgo-lounge-item-price-displayer) and here, obviously. Whatever place you prefer, please enjoy it :)
 
 # Works with:
 * [www.dota2lounge.com](http://www.dota2lounge.com)
