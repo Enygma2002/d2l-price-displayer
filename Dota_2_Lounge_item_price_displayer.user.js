@@ -121,10 +121,10 @@ var getLowestPrice = function(itemElement, override) {
           var priceObj = $.parseJSON(httpResponse);
           if(priceObj.success)
           {
-           var str = "<span title='\"Lowest Price\"'>L: " + priceObj.lowest_price + "</span> <br>";
-           str+="<span title='\"Median Price\"'>M: " + priceObj.median_price + "</span> <br>";
+           var str = "<span style=\"color:red\" title='\"Lowest Price\"'>L: " + priceObj.lowest_price + "</span> <br>";
+           str+="<span style=\"color:green\"  title='\"Median Price\"'>M: " + priceObj.median_price + "</span> <br>";
            
-           str+="<span title='\"Volume\"'>V: " + priceObj.volume + "</span> <br>";
+           str+="<span style=\"color:blue\"  title='\"Volume\"'>V: " + priceObj.volume + "</span> <br>";
                itemNameElement.querySelector(".scriptStatus").innerHTML = str;
           }
           else
