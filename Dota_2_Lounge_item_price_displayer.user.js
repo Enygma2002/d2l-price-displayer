@@ -118,16 +118,18 @@ var getLowestPrice = function(itemElement, override) {
         url: url,
         onload: function (response) {
             var httpResponse = response.responseText;
-          //  var match = lowestPriceWithFeeRegExp.exec(httpResponse);
-        //    var priceWithFee = "<span class='" + (match ?
-          //      "itemMarketable'>" + match[1] :
-        //        "itemNotMarketable'>Not Marketable") +
-         //       "</span>";
-          //  match = lowestPriceWithoutFeeRegExp.exec(httpResponse);
-        //    var priceWithoutFee = match ? match[1] + " - without fee (seller receives)" : ""; 
-        var priceObj = $.parseJSON(httpResponse);
-        var price = priceObj.lowest_price;
-            itemNameElement.querySelector(".scriptStatus").innerHTML = "<span title='LowestPrice'>" + price + "</span>";
+          var priceObj = $.parseJSON(httpResponse);
+          if(priceObj.success)
+          {
+           var str = "<span title='\"Lowest Price\"'>" + priceObj.lowest_price + "</span> |";
+           str+="<span title='\"Median Price\"'>" + priceObj.median_price + "</span> |";
+           str+="<span title='\"Volume\"'>" + priceObj.volume + "</span>";
+               itemNameElement.querySelector(".scriptStatus").innerHTML = str;
+          }
+          else
+          {
+             itemNameElement.querySelector(".scriptStatus").innerHTML = "Error!";
+          }
         }
     });
 }
