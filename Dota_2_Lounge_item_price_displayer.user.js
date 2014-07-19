@@ -7,8 +7,8 @@
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http(s)?://(www.)?dota2lounge.com//
 // @include     /^http(s)?://(www.)?csgolounge.com//
-// @updateURL   http://userscripts.org/scripts/source/182588.user.js
-// @downloadURL http://userscripts.org/scripts/source/182588.user.js
+// @updateURL   https://github.com/joturako/d2l-price-displayer/raw/master/Dota_2_Lounge_item_price_displayer.user.js
+// @downloadURL https://github.com/joturako/d2l-price-displayer/raw/master/Dota_2_Lounge_item_price_displayer.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
 // ==/UserScript==
