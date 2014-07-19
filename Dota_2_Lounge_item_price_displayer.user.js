@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        Dota 2 & CSGO Lounge item price displayer
 // @namespace   http://www.enygma.ro
-// @version     2.2
-// @author      Enygma
+// @version     2.3
+// @author      Enygma + Johnny
 // @description Displays an item's lowest price offer from the Steam Community Market and helps to copy an item's name or to quickly open the market listings for an item.
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http(s)?://(www.)?dota2lounge.com//
@@ -121,9 +121,10 @@ var getLowestPrice = function(itemElement, override) {
           var priceObj = $.parseJSON(httpResponse);
           if(priceObj.success)
           {
-           var str = "<span title='\"Lowest Price\"'>" + priceObj.lowest_price + "</span> |";
-           str+="<span title='\"Median Price\"'>" + priceObj.median_price + "</span> |";
-           str+="<span title='\"Volume\"'>" + priceObj.volume + "</span>";
+           var str = "<span title='\"Lowest Price\"'>L:" + priceObj.lowest_price + "</span> <br>";
+           str+="<span title='\"Median Price\"'>M:" + priceObj.median_price + "</span> <br>";
+           
+           str+="<span title='\"Volume\"'>V:" + priceObj.volume + "</span>";
                itemNameElement.querySelector(".scriptStatus").innerHTML = str;
           }
           else
