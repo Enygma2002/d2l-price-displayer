@@ -50,6 +50,8 @@ var getItemElement = function(mouseEvent) {
         itemElement = targetElement;
     } else if (hasClass(targetElement.parentNode, "oitm")) {
         itemElement = targetElement.parentNode;
+    } else if (hasClass(targetElement.parentNode, "item")) {
+        itemElement = targetElement.parentNode;
     } else {
         return null;
     }
