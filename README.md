@@ -20,9 +20,6 @@ _Note:_ This script was originally published on [userscripts.org](http://userscr
 * A 'Refresh' button is added to re-fetch the latest price for the item from the Steam market.
 
    ![Refresh price button available](http://i.imgur.com/8TumkIN.png)
-* A 'Show listings' button is added to allow quickly opening the Steam Market listings for that item for further study.
-
-   ![Show listings button available to go to the Steam Market website](http://i.imgur.com/WSUpBbD.png)
 * A popup with the selectable item's name is displayed if the item's name panel is clicked. This helps copy the item's name if needed.
 
    ![Popup helper to copy an item's name](http://i.imgur.com/sFQXBgH.png)
@@ -31,18 +28,38 @@ Please share your opinions, suggestions or bug reports.
 
 Hope you like it ;)
 
-_Credits:_ This script is inspired by the [Steam Market Price Matcher](http://userscripts.org/scripts/show/154071) script by tomatolicious.
+# Installation:
 
-**Google Chrome users:** In case you`re having issues running or installing the script manually with Google Chrome, try installing the [Tampermonkey extension](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) and install the script there. This way the script should be able to run nicely and you will also benefit from automatic updates when new version are available.
+**Google Chrome:** You will need to install this script using the [Tampermonkey extension](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo). This way the script should be able to run nicely and you will also benefit from automatic updates when new version are available.
 
-**Firefox users:** You will obviously need the [Greasemonkey addon] (https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) to be able to install and use this script.
+**Firefox:** You will obviously need the [Greasemonkey addon] (https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) to be able to install and use this script.
+
+# Credits:
+
+This script is initially inspired by the [Steam Market Price Matcher](http://userscripts.org/scripts/show/154071) script by the userscripts.org user tomatolicious.
+
+A special shout out to people that helped out so far:
+- [Reishid](http://steamcommunity.com/id/reishid) for his [great post](http://steamcommunity.com/groups/dota2lounge/discussions/0/648814396001808197/) on the D2L Steam Community forums
+- [Powsin (@lordpuza)](https://github.com/lordpuza) for giving out a helping hand with fixing the script
+- &lt;Your name here&gt; for being awesome :)
 
 # Donations:
+
 If this script saved your life and you want to show your love and support to its developer for the work he did and will keep on doing, please consider offering a modest donation :)
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=YE37DBVW7UBDE&amp;lc=RO&amp;item_name=Dota%202%20%26%20CSGO%20Lounge%20item%20price%20displayer&amp;item_number=lounge%2ditem%2dprice%2ddisplayer&amp;currency_code=EUR&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
+If you can't use PayPal or if you prefer otherwise, here's my [Steam Trade link](http://steamcommunity.com/tradeoffer/new/?partner=40940382&token=yltD_4U7) where you can show your appreciation:
+
+[![Donate on Steam](http://i.imgur.com/C4RiaHy.png)](http://steamcommunity.com/tradeoffer/new/?partner=40940382&token=yltD_4U7)
+
 # Updates:
+
+**October 13, 2014**
+
+* Updated the script to run with the recent changes done by the dota2lounge.com and csgolounge.com websites.
+* Accepting donations through the published [Steam Trade link](http://steamcommunity.com/tradeoffer/new/?partner=40940382&token=yltD_4U7) in the "Donations" section above.
+* Removed the 'Show listings' custom button, since this feature is provided by the website by default through the new "Market" link.
 
 **May 6, 2014**
 
@@ -55,7 +72,7 @@ Accepting donations! The script seems to have caught on. I am very happy with th
 **Mar 17, 2014**
 
 * Fixed the "Remove item" behavior when clicked that was causing the copy-item-name popup to also show.
-* Skipping the d2l generic items ("Any Common", "Any Rare", etc.) since they don`t exist on the Steam Market and should not be handled by the script.
+* Skipping the d2l generic items ("Any Common", "Any Rare", etc.) since they don't exist on the Steam Market and should not be handled by the script.
 
 **Mar 16, 2014**
 
