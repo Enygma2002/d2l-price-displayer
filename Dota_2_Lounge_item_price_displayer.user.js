@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name        Dota 2 & CSGO Lounge item price displayer
 // @namespace   http://www.enygma.ro
-// @version     2.2
+// @version     2.3
 // @author      Enygma
-// @description Displays an item's lowest price offer from the Steam Community Market and helps to copy an item's name or to quickly open the market listings for an item.
+// @description Displays an item's lowest price offer from the Steam Community Market and helps to copy an item's name.
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http(s)?://(www.)?dota2lounge.com//
 // @include     /^http(s)?://(www.)?csgolounge.com//
-// @updateURL   http://userscripts.org/scripts/source/182588.user.js
-// @downloadURL http://userscripts.org/scripts/source/182588.user.js
+// @updateURL   https://github.com/Enygma2002/d2l-price-displayer/raw/master/Dota_2_Lounge_item_price_displayer.user.js
+// @downloadURL https://github.com/Enygma2002/d2l-price-displayer/raw/master/Dota_2_Lounge_item_price_displayer.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
 // ==/UserScript==
