@@ -45,14 +45,29 @@ var getItemElement = function(mouseEvent) {
     var targetElement = mouseEvent.target;
     var itemElement = null;
 
-    // Hover either the item element or its picture (child element).
+    // Check the hovered element to see if it's an item element or one of it's children (image or rarity section).
+
+    // Old d2l website layout that used directly the "item" display and within it the "name" panel;
+    // It is now only present on csgolounge but we still want to support it in order to work with both sites.
+    if (hasClass(targetElement, "item") && targetElement.querySelector(".name")) {
+        // Hover the item display (contains image and rarity section)
+        itemElement = target;
+    } else if (hasClass(targetElement.parentNode, "item") && targetElement.parentNode.querySelector(".name")) {
+        // Hover an individual item display's children (image or rarity section)
+        itemElement = targetElement.parentNode;
+    } else
+    // New d2l website layout, that uses an "oitm" container for the "item" display and the "name" panel
     if (hasClass(targetElement, "oitm")) {
+        // Hover the main container (contains item display and item popup).
         itemElement = targetElement;
     } else if (hasClass(targetElement.parentNode, "oitm")) {
+        // Hover the item display (contains image and rarity section)
         itemElement = targetElement.parentNode;
     } else if (hasClass(targetElement.parentNode, "item")) {
-        itemElement = targetElement.parentNode;
+        // Hover an individual item display's children (image or rarity section)
+        itemElement = targetElement.parentNode.parentNode;
     } else {
+        // Hovered an uninteresting element of the UI.
         return null;
     }
 
@@ -194,10 +209,18 @@ var showSteamMarketListings = function(itemElement) {
 
 // Helper method to check if an element has the specified class name.
 var hasClass = function(element, cls) {
-    return element && (" " + element.className + " ").indexOf( " " + cls + " " ) > -1;
+    return element && (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
 }
 
 // Style.
-GM_addStyle(".itemNotMarketable { color : red } .itemMarketable { color: green } .extraButton { margin-left: 0.3em; vertical-align: top; margin-top: -0.1em; border: 0; padding: 0; width: 16px; height: 16px; }");
+// The two websites currently have diferent styles, so we need to tweak a bit the price color to make it properly readable.
+if (appID == 570) {
+    // D2L - lighter green (same used on the "Market" link) to go with the darker name panel background.
+    GM_addStyle(".itemMarketable { color: #8EC13E }");
+} else {
+    // CSGOLounge - darker green to contrast with the lighter name panel background.
+    GM_addStyle(".itemMarketable { color: green }");
+}
+GM_addStyle(".itemNotMarketable { color : red } .extraButton { margin-left: 0.3em; vertical-align: top; margin-top: -0.1em; border: 0; padding: 0; width: 16px; height: 16px; }");
 GM_addStyle(".refreshButton { background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABOUlEQVQ4jc2RsUoDQRCGv32CXECzdjaWRiOCVSA+RdqAL6BFesUXOPUFbCWKJ2thkcRgxCa3cJUEQuCwExRjCi1sxiKXsElO6wz81e58888/sPhlESwxlhNaeP/+zRnO/wCMNaBDIbVZG/ztppLcLYdpgK3uSFgGc05WAnbX7pTcD5FCQ8lyMDOlQ4mQaO8lcRI6Q7wATxsGR32k9YUc9RFtiL1gZsoTq1jk7D3JxLEeFNtKLj6ZqNhWkppHSOvxO3GRFlb3J3mc2VEb/I2mktM3Jtp5UKINgUuProYJoMO+C8jWyGhDXO0hl0Ok2hutma2RcR1UsMjx6ySoA9fJkqGUryu5+UDydSW5azbn1wiJyjFSjp3bO4lrg19opJzacZEhJMIi688juYBkFT+9eRpUGYOmbr6Q9QvwBrFqSdh8NgAAAABJRU5ErkJggg==) no-repeat left center; }");
 GM_addStyle(".steamMarketListingsButton { background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sIBhUuIxK7S5QAAAFbSURBVDjLY7x27QaDoYGhOQMDwwkGHEBEVJiBgYGBwcLalOHE0dMMb16/ZWBgYGA4f+E8IwM7G+d/fDg4LPD/8VNH/yOD46eO/ufh5P3Pzsb5H68B0tIycM08nLxwDDOEKANgmheumf3//////xeumQ0XJ2hAcFgg3ABkAOPHRsf9Z2LAA0rr8+HsRWvnwGl+IX6EIly29/T0wG3ctm0bShjk5mcjvBAcFojT7/hAbHQcxACYQElx6f+S4tL/e/bvxKtx4rT+/9LSMnDLGLApkpaWwTCopLgUq1cZcNkE88bxU0dRbETHTLDQxQUcbFzgSRcbYEmLymPYE3qYIbsqiWFq2zyGyOgIuOTJawcZCAEWBgYGhlWrV0PieMlCBhkZWQYGBgaGtbuWMKyZt5U4A2CGyCvKMaxZv5KBgYGBYc28DQzLVywnaADjlcvXGYyNjf4zkAHOnj3HDAAt54OFwXNyhAAAAABJRU5ErkJggg==) no-repeat left center; }");
