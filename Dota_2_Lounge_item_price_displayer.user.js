@@ -98,8 +98,7 @@ var attachExtraPanelAndListeners = function(itemElement) {
     // Otherwise, create our own panel to append... 
     extraPanel = document.createElement('div');
     extraPanel.innerHTML = "<span class='scriptStatus'>Ready</span>" +
-        "<button type='button' class='extraButton refreshButton' title='Refresh'/>" +
-        "<button type='button' class='extraButton steamMarketListingsButton' title='Show listings for the item on Steam Market'/>";
+        "<button type='button' class='extraButton refreshButton' title='Refresh'/>";
     extraPanel.setAttribute("class", "extraPanel");
 
     // ...and append it.
@@ -111,12 +110,6 @@ var attachExtraPanelAndListeners = function(itemElement) {
     refreshButton.addEventListener("click", function(event) {
         event.stopPropagation();
         getLowestPrice(itemElement, true);
-    }, false);
-    // Set click event handler for the Steam market listings button that opens in a new tab.
-    var steamMarketListingsButton = extraPanel.querySelector(".steamMarketListingsButton");
-    steamMarketListingsButton.addEventListener("click", function(event) {
-        event.stopPropagation();
-        showSteamMarketListings(itemElement);
     }, false);
 }
 
@@ -194,19 +187,6 @@ var copyItemNameHandler = function(event) {
 // Tags that, if clicked on in an item name panel, should not execute the copyItemNameHandler.
 var excludedTags = ["A", "IMG"];
 
-// Opens a new tab with the Steam market listings of a given item.
-var showSteamMarketListings = function(itemElement) {
-    var url = getSteamMarketListingsURL(itemElement);
-    var win = window.open(url, "_blank");
-    if (win) {
-        // Browser has allowed it to be opened.
-        win.focus();
-    } else {
-        // Broswer has blocked it.
-        alert("Please allow popups for this site in order to open the Steam market listings.");
-    }
-}
-
 // Helper method to check if an element has the specified class name.
 var hasClass = function(element, cls) {
     return element && (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
@@ -223,4 +203,3 @@ if (appID == 570) {
 }
 GM_addStyle(".itemNotMarketable { color : red } .extraButton { margin-left: 0.3em; vertical-align: top; margin-top: -0.1em; border: 0; padding: 0; width: 16px; height: 16px; }");
 GM_addStyle(".refreshButton { background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABOUlEQVQ4jc2RsUoDQRCGv32CXECzdjaWRiOCVSA+RdqAL6BFesUXOPUFbCWKJ2thkcRgxCa3cJUEQuCwExRjCi1sxiKXsElO6wz81e58888/sPhlESwxlhNaeP/+zRnO/wCMNaBDIbVZG/ztppLcLYdpgK3uSFgGc05WAnbX7pTcD5FCQ8lyMDOlQ4mQaO8lcRI6Q7wATxsGR32k9YUc9RFtiL1gZsoTq1jk7D3JxLEeFNtKLj6ZqNhWkppHSOvxO3GRFlb3J3mc2VEb/I2mktM3Jtp5UKINgUuProYJoMO+C8jWyGhDXO0hl0Ok2hutma2RcR1UsMjx6ySoA9fJkqGUryu5+UDydSW5azbn1wiJyjFSjp3bO4lrg19opJzacZEhJMIi688juYBkFT+9eRpUGYOmbr6Q9QvwBrFqSdh8NgAAAABJRU5ErkJggg==) no-repeat left center; }");
-GM_addStyle(".steamMarketListingsButton { background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sIBhUuIxK7S5QAAAFbSURBVDjLY7x27QaDoYGhOQMDwwkGHEBEVJiBgYGBwcLalOHE0dMMb16/ZWBgYGA4f+E8IwM7G+d/fDg4LPD/8VNH/yOD46eO/ufh5P3Pzsb5H68B0tIycM08nLxwDDOEKANgmheumf3//////xeumQ0XJ2hAcFgg3ABkAOPHRsf9Z2LAA0rr8+HsRWvnwGl+IX6EIly29/T0wG3ctm0bShjk5mcjvBAcFojT7/hAbHQcxACYQElx6f+S4tL/e/bvxKtx4rT+/9LSMnDLGLApkpaWwTCopLgUq1cZcNkE88bxU0dRbETHTLDQxQUcbFzgSRcbYEmLymPYE3qYIbsqiWFq2zyGyOgIuOTJawcZCAEWBgYGhlWrV0PieMlCBhkZWQYGBgaGtbuWMKyZt5U4A2CGyCvKMaxZv5KBgYGBYc28DQzLVywnaADjlcvXGYyNjf4zkAHOnj3HDAAt54OFwXNyhAAAAABJRU5ErkJggg==) no-repeat left center; }");
