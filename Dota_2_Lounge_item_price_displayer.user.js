@@ -46,8 +46,10 @@ var getItemElement = function(mouseEvent) {
     var itemElement = null;
 
     // Hover either the item element or its picture (child element).
-    if (hasClass(targetElement, "item")) {
+    if (hasClass(targetElement, "oitm")) {
         itemElement = targetElement;
+    } else if (hasClass(targetElement.parentNode, "oitm")) {
+        itemElement = targetElement.parentNode;
     } else if (hasClass(targetElement.parentNode, "item")) {
         itemElement = targetElement.parentNode;
     } else {
