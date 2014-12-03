@@ -128,14 +128,19 @@ var getLowestPrice = function(itemElement, override) {
         url: url,
         onload: function (response) {
             var httpResponse = response.responseText;
-            var match = lowestPriceWithFeeRegExp.exec(httpResponse);
-            var priceWithFee = "<span class='" + (match ?
-                "itemMarketable'>" + match[1] :
-                "itemNotMarketable'>Not Marketable") +
-                "</span>";
-            match = lowestPriceWithoutFeeRegExp.exec(httpResponse);
-            var priceWithoutFee = match ? match[1] + " - without fee (seller receives)" : ""; 
-            itemNameElement.querySelector(".scriptStatus").innerHTML = "<span title='" + priceWithoutFee + "'>" + priceWithFee + "</span>";
+          var priceObj = $.parseJSON(httpResponse);
+          if(priceObj.success)
+          {
+           var str = "<span style=\"color:red\" title='\"Lowest Price\"'>L: " + priceObj.lowest_price + "</span> <br>";
+           str+="<span style=\"color:green\"  title='\"Median Price\"'>M: " + priceObj.median_price + "</span> <br>";
+           
+           str+="<span style=\"color:blue\"  title='\"Volume\"'>V: " + priceObj.volume + "</span> <br>";
+               itemNameElement.querySelector(".scriptStatus").innerHTML = str;
+          }
+          else
+          {
+             itemNameElement.querySelector(".scriptStatus").innerHTML = "Error!";
+          }
         }
     });
 }
@@ -144,7 +149,8 @@ var getLowestPrice = function(itemElement, override) {
 var getSteamMarketListingsURL = function(itemElement) {
     var itemName = getItemName(itemElement);
     var itemNameEncoded = encodeURIComponent(itemName);
-    var url = "http://steamcommunity.com/market/listings/" + appID + "/" + itemNameEncoded + "/";
+    var url = "http://steamcommunity.com/market/priceoverview/?appid="+appID+"&market_hash_name="+itemNameEncoded;
+   // var url = "http://steamcommunity.com/market/listings/" + appID + "/" + itemNameEncoded + "/";
 
     return url;
 }
