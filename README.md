@@ -36,11 +36,13 @@ Hope you like it ;)
 
 # Credits:
 
-This script is initially inspired by the [Steam Market Price Matcher](http://userscripts.org/scripts/show/154071) script by the userscripts.org user tomatolicious.
+This script is initially inspired by the [Steam Market Price Matcher](http://userscripts-mirror.org/scripts/show/154071) script by the userscripts.org user tomatolicious.
 
 A special shout out to people that helped out so far:
 - [Reishid](http://steamcommunity.com/id/reishid) for his [great post](http://steamcommunity.com/groups/dota2lounge/discussions/0/648814396001808197/) on the D2L Steam Community forums
 - [Powsin (@lordpuza)](https://github.com/lordpuza) for giving out a helping hand with fixing the script
+- [@joturako](https://github.com/joturako) for suggesting a better and clever way of retrieving prices from the Steam Market
+- [Enhanced Steam project](https://github.com/jshackles/Enhanced_Steam) for inspiration and reference on building a nice mapping of the available currencies on the Steam Market
 - &lt;Your name here&gt; for being awesome :)
 
 # Donations:
