@@ -244,7 +244,19 @@ var getLowestPrice = function(itemElement, override) {
                 // Determine the trend, if possible.
                 var lowestPrice = getPriceValue(priceObj.lowest_price);
                 var medianPrice = getPriceValue(priceObj.median_price);
-                var trend = (lowestPrice && medianPrice ? (lowestPrice > medianPrice ? "&#8599;" : "&#8600;") : null);
+                var trend = null;
+                if (lowestPrice && medianPrice) {
+                    if (lowestPrice > medianPrice) {
+                        // Ascending trend.
+                        trend = "&#8599;";
+                    } else if (lowestPrice < medianPrice) {
+                        // Descending trend.
+                        trend = "&#8600;";
+                    } else {
+                        // Stagnating trend.
+                        trend = "&#8594;";
+                    }
+                }
 
                 // Determine price safety
                 var priceSafety = getPriceSafety(priceObj.volume);
@@ -318,10 +330,10 @@ var thousandSeparatorRegex = new RegExp("[,.]");
  * If price volume information is available (nr. of daily transactions), we determine price "safety" based on how many
  * transactions are for the item. Few transactions (<= 10) means the item is not popular and it will be harder to get rid of.
  *
- * If no volume information exists, the default is "priceSafe".
+ * If no volume information exists, the default is "priceUnsafe".
  */
 var getPriceSafety = function(priceVolumeString) {
-    var result = "priceSafe";
+    var result = "priceUnsafe";
 
     if (priceVolumeString) {
         // Make sure to clean the volume string of any thousand separator that can cause problems in the conversion.
@@ -332,6 +344,8 @@ var getPriceSafety = function(priceVolumeString) {
             result = "priceUnsafe";
         } else if (dailyTransactions <= 50) {
             result = "priceWarning";
+        } else {
+            result = "priceSafe";
         }
     }
 
