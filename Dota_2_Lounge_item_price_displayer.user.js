@@ -103,6 +103,9 @@ var attachCurrencySelector = function() {
             // Refresh the list of available languages to reflect the new selection.
             headerElement.removeChild(currencySelector);
             attachCurrencySelector();
+
+            // Refresh any already retrieved prices to use the newly selected currency.
+            refreshExistingPrices();
         });
     }
 }
@@ -115,6 +118,19 @@ var setCurrentCurrency = function(newCurrentCurrency) {
 
     // Save the new value.
     GM_setValue("currency", newCurrentCurrency);
+}
+
+// Refresh all the currently retrieved prices (that were hovered at some point) so that they are displayed consistenly
+// using the actual currentCurrency and not the currency that was active then they were first retrieved (hovered).
+var refreshExistingPrices = function() {
+    var itemNameElements = document.querySelectorAll(".oitm > .name");
+    for (var i=0; i<itemNameElements.length; i++) {
+        var itemElement = itemNameElements[i].parentNode;
+        if (itemElement.querySelector('.extraPanel')) {
+            // Retrieve and override new values.
+            getLowestPrice(itemElement, true);
+        }
+    }
 }
 
 // Main event listener for hovering items.
