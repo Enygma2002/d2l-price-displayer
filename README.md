@@ -8,10 +8,10 @@ Dota 2 & CS:GO Lounge item price displayer
 This script is free and open source and it will stay that way. If you like it and want to show your appreciation and support to its developer, please consider offering a modest donation:
 
 * [Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=YE37DBVW7UBDE&lc=RO&item_name=Dota%202%20%26%20CS%3aGO%20Lounge%20item%20price%20displayer&item_number=lounge%20item%20price%20displayer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest) - You want to buy me a beer or a cup of hot chocolate? Awesome! Thank you! :)
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=YE37DBVW7UBDE&lc=RO&item_name=Dota%202%20%26%20CS%3aGO%20Lounge%20item%20price%20displayer&item_number=lounge%20item%20price%20displayer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest)
+  [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=YE37DBVW7UBDE&lc=RO&item_name=Dota%202%20%26%20CS%3aGO%20Lounge%20item%20price%20displayer&item_number=lounge%20item%20price%20displayer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest)
 
 * [Steam Trade link](http://steamcommunity.com/tradeoffer/new/?partner=40940382&token=yltD_4U7) - Steam items/keys/sets/games/etc. anything is welcomed as a sign of your appreciation.
-[![Donate on Steam](https://i.imgur.com/C4RiaHy.png)](http://steamcommunity.com/tradeoffer/new/?partner=40940382&token=yltD_4U7)
+  [![Donate on Steam](https://i.imgur.com/C4RiaHy.png)](http://steamcommunity.com/tradeoffer/new/?partner=40940382&token=yltD_4U7)
 
 # Works with:
 
