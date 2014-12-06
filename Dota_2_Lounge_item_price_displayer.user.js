@@ -65,7 +65,7 @@ var validateCurrency = function(currency) {
     }
 
     return result;
-}
+};
 
 // Get the user selected currency, if available, otherwise (or if invalid) default on USD.
 var currentCurrency = validateCurrency(GM_getValue("currency"));
@@ -123,7 +123,7 @@ var attachCurrencySelector = function() {
             refreshExistingPrices();
         });
     }
-}
+};
 attachCurrencySelector();
 
 // Set the new current currency and save it so that it is available next time we reload the page.
@@ -136,7 +136,7 @@ var setCurrentCurrency = function(newCurrentCurrency) {
 
     // Save the new value.
     GM_setValue("currency", validatedNewCurrency);
-}
+};
 
 // Refresh all the currently retrieved prices (that were hovered at some point) so that they are displayed consistenly
 // using the actual currentCurrency and not the currency that was active then they were first retrieved (hovered).
@@ -149,7 +149,7 @@ var refreshExistingPrices = function() {
             getLowestPrice(itemElement, true);
         }
     }
-}
+};
 
 // Main event listener for hovering items.
 document.addEventListener("mouseover", function (event) {
@@ -160,7 +160,7 @@ document.addEventListener("mouseover", function (event) {
 
     attachExtraPanelAndListeners(itemElement);
     getLowestPrice(itemElement);
-})
+});
 
 // Get the hovered item, if any.
 var getItemElement = function(mouseEvent) {
@@ -206,7 +206,7 @@ var getItemElement = function(mouseEvent) {
     }
 
     return itemElement;
-}
+};
 
 // Add to the specified item element an extra panel that contains the price information and a click handler to facilitate copying the item's name 
 var attachExtraPanelAndListeners = function(itemElement) {
@@ -233,7 +233,7 @@ var attachExtraPanelAndListeners = function(itemElement) {
         event.stopPropagation();
         getLowestPrice(itemElement, true);
     }, false);
-}
+};
 
 // Get the lowest price for an item from the Steam market.
 var getLowestPrice = function(itemElement, override) {
@@ -280,7 +280,7 @@ var getLowestPrice = function(itemElement, override) {
                 var priceSafety = getPriceSafety(priceObj.volume);
 
                 // Build the result.
-                result = "<span class='itemMarketable " + priceSafety + "' title='" + extraInfo + "'>"
+                result = "<span class='itemMarketable " + priceSafety + "' title='" + extraInfo + "'>";
                 result += priceObj.lowest_price;
                 if (trend) {
                     result += " " + trend;
@@ -300,7 +300,7 @@ var getLowestPrice = function(itemElement, override) {
             itemNameElement.querySelector(".scriptStatus").innerHTML = result;
         }
     });
-}
+};
 
 // Cached RegExps used by getPriceValue.
 var currencySymbolRegex = new RegExp("&#[0-9]+;");
@@ -330,7 +330,7 @@ var getPriceValue = function(priceWithCurrency) {
 
     // Parse and return the value.
     return parseFloat(priceString);
-}
+};
 
 // Helper method to unescape an escaped HTML string, such as what we get from the price JSON.
 var unescapeHtml = function(escapedStr) {
@@ -368,7 +368,7 @@ var getPriceSafety = function(priceVolumeString) {
     }
 
     return result;
-}
+};
 
 // Computes the URL used to access the Steam market listings for a given item.
 var getSteamMarketListingsURL = function(itemName) {
@@ -380,7 +380,7 @@ var getSteamMarketListingsURL = function(itemName) {
     url += "&currency=" + currencyInfo.id;
 
     return url;
-}
+};
 
 // Extract the item's name from a DOM item element.
 var getItemName = function(itemElement) {
@@ -388,7 +388,7 @@ var getItemName = function(itemElement) {
     var itemName = itemNameElement.querySelector("b").innerHTML.trim();
 
     return itemName;
-}
+};
 
 // Event handler to facilitate copying an item's name.
 var copyItemNameHandler = function(event) {
@@ -411,7 +411,7 @@ var copyItemNameHandler = function(event) {
     // Get and display the item's name.
     var itemName = itemNameElement.querySelector("b").innerHTML.trim();
     window.prompt("Press CTRL+C to copy the item's name:", itemName);
-}
+};
 
 // Tags that, if clicked on in an item name panel, should not execute the copyItemNameHandler.
 var excludedTags = ["A", "IMG"];
@@ -419,7 +419,7 @@ var excludedTags = ["A", "IMG"];
 // Helper method to check if an element has the specified class name.
 var hasClass = function(element, cls) {
     return element && (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
-}
+};
 
 // Style.
 // The two websites currently have diferent styles, so we need to tweak a bit the price colors to make them properly readable.
