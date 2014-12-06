@@ -56,8 +56,19 @@ var availableCurrencies = {
     // Add more as Steam makes them available.
 };
 
-// Get the user selected currency, if available, otherwise default on USD.
-var currentCurrency = GM_getValue("currency", "$");
+// Validate a currency, otherwise default to USD.
+var validateCurrency = function(currency) {
+    var result = "$";
+
+    if (availableCurrencies[currency]) {
+        result = currency;
+    }
+
+    return result;
+}
+
+// Get the user selected currency, if available, otherwise (or if invalid) default on USD.
+var currentCurrency = validateCurrency(GM_getValue("currency"));
 
 // Registers the currency selection box in the top right of the website.
 var attachCurrencySelector = function() {
@@ -85,6 +96,10 @@ var attachCurrencySelector = function() {
         currencySelectorHTML += "<a id='" + currencyCode + "'>" + currencyInfo.symbol + "</a>";
     }
 
+    // Add the donations button.
+    currencySelectorHTML += "<a id='donate' title='Show your appreciation for the script' ";
+    currencySelectorHTML += "href='https://github.com/Enygma2002/d2l-price-displayer#donations' target='_blank'>Donate</a>";
+
     currencySelectorHTML += "</div>";
 
     currencySelector.innerHTML = currencySelectorHTML;
@@ -92,7 +107,7 @@ var attachCurrencySelector = function() {
     headerElement.appendChild(currencySelector);
 
     // Attach click event listeners for all the available languages in the list.
-    var availableCurrencyElements = currencySelector.querySelectorAll('a');
+    var availableCurrencyElements = currencySelector.querySelectorAll("a:not([id='donate'])");
     for (var i=0; i<availableCurrencyElements.length; i++) {
         var availableCurrencyElement = availableCurrencyElements[i];
         availableCurrencyElement.addEventListener('click', function(mouseEvent) {
@@ -111,13 +126,16 @@ var attachCurrencySelector = function() {
 }
 attachCurrencySelector();
 
-// Set the new current currency and save so that it is available next time we reload the page.
+// Set the new current currency and save it so that it is available next time we reload the page.
 var setCurrentCurrency = function(newCurrentCurrency) {
-    // Set the cached vale.
-    currentCurrency = newCurrentCurrency;
+    // Make sure we set a valid currency.
+    var validatedNewCurrency = validateCurrency(newCurrentCurrency);
+
+    // Set the cached value used by the script.
+    currentCurrency = validatedNewCurrency;
 
     // Save the new value.
-    GM_setValue("currency", newCurrentCurrency);
+    GM_setValue("currency", validatedNewCurrency);
 }
 
 // Refresh all the currently retrieved prices (that were hovered at some point) so that they are displayed consistenly
@@ -404,20 +422,25 @@ var hasClass = function(element, cls) {
 }
 
 // Style.
-// The two websites currently have diferent styles, so we need to tweak a bit the price color to make it properly readable.
-var priceColor;
+// The two websites currently have diferent styles, so we need to tweak a bit the price colors to make them properly readable.
+var priceSafeColor;
+var priceWarningColor;
 if (appID == 570) {
-    // D2L - lighter green (same used on the "Market" link) to go with the darker name panel background.
-    priceColor = "#8EC13E";
+    // D2L - lighter colors to go with the darker name panel background.
+    priceSafeColor = "#8EC13E"; // same used on the "Market" link
+    priceWarningColor = "orange";
 } else {
-    // CSGOLounge - darker green to contrast with the lighter name panel background.
-    priceColor = "green";
+    // CSGOLounge - darker colors to contrast with the lighter name panel background.
+    priceSafeColor = "green";
+    priceWarningColor = "#C74411";
 }
 GM_addStyle(".currency a { color: white; font-weight: bold; margin-top: 0.2em; }");
-GM_addStyle(".priceSafe { color: " + priceColor + " }");
-GM_addStyle(".priceWarning { color : orange }");
+GM_addStyle(".priceSafe { color: " + priceSafeColor + " }");
+GM_addStyle(".priceWarning { color : " + priceWarningColor + " }");
 GM_addStyle(".priceUnsafe { color : red }");
 GM_addStyle(".itemNotMarketable { color : red }");
 GM_addStyle(".error { color : red }");
 GM_addStyle(".extraButton { margin-left: 0.3em; vertical-align: top; margin-top: -0.1em; border: 0; padding: 0; width: 16px; height: 16px; }");
 GM_addStyle(".refreshButton { background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABOUlEQVQ4jc2RsUoDQRCGv32CXECzdjaWRiOCVSA+RdqAL6BFesUXOPUFbCWKJ2thkcRgxCa3cJUEQuCwExRjCi1sxiKXsElO6wz81e58888/sPhlESwxlhNaeP/+zRnO/wCMNaBDIbVZG/ztppLcLYdpgK3uSFgGc05WAnbX7pTcD5FCQ8lyMDOlQ4mQaO8lcRI6Q7wATxsGR32k9YUc9RFtiL1gZsoTq1jk7D3JxLEeFNtKLj6ZqNhWkppHSOvxO3GRFlb3J3mc2VEb/I2mktM3Jtp5UKINgUuProYJoMO+C8jWyGhDXO0hl0Ok2hutma2RcR1UsMjx6ySoA9fJkqGUryu5+UDydSW5azbn1wiJyjFSjp3bO4lrg19opJzacZEhJMIi688juYBkFT+9eRpUGYOmbr6Q9QvwBrFqSdh8NgAAAABJRU5ErkJggg==) no-repeat left center; }");
+GM_addStyle(".ddbtn a#donate { font-size: 0.7em; margin-top: 1.5em; color: orange; }");
+GM_addStyle(".ddbtn a#donate:before { color: red; content: '\u2665'; display: block; font-size: 1.5em; margin-bottom: 0.2em; text-align: center; text-shadow: 0 1px 1px #000; }");
