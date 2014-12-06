@@ -3,7 +3,7 @@
 // @namespace   http://www.enygma.ro
 // @version     3.0
 // @author      Enygma
-// @description Displays an item's lowest price offer from the Steam Community Market and helps to copy an item's name.
+// @description Displays an item's price information from the Steam Community Market and helps to copy an item's name.
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http(s)?://(www.)?dota2lounge.com//
 // @include     /^http(s)?://(www.)?csgolounge.com//
