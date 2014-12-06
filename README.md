@@ -1,28 +1,67 @@
 Dota 2 & CS:GO Lounge item price displayer
 ===================
 
-<a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/">Greasemonkey</a> userscript for the <a href="http://dota2lounge.com">dota2lounge.com</a> and <a href="http://csgolounge.com">csgolounge.com</a> websites that displays an item's lowest price offer from the <a href="http://steamcommunity.com/market/">Steam Community Market</a> and helps to copy an item's name or to quickly open the market listings for an item.
+[Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) userscript for the [dota2lounge.com](http://dota2lounge.com) and [csgolounge.com](http://csgolounge.com) websites that, when hovering an item, displays its price information from the [Steam Community Market](http://steamcommunity.com/market/) using the user selected currency and also helps to easily copy an item's name.
 
-_Note:_ This script was originally published on [userscripts.org](http://userscripts.org:8080/scripts/show/182588), but due to the availability issues the site has been having lately, I have also published it on [openuserjs.org](https://openuserjs.org/scripts/enygma/httpwww.enygma.ro/Dota_2_CSGO_Lounge_item_price_displayer), on [greasyfork.org](https://greasyfork.org/scripts/666-dota-2-csgo-lounge-item-price-displayer) and here, obviously. Whatever place you prefer, please enjoy it :)
+# Donations:
+
+This script is free and open source and it will stay that way. If you like it and want to show your appreciation and support to its developer, please consider offering a modest donation:
+
+* [Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=YE37DBVW7UBDE&lc=RO&item_name=Dota%202%20%26%20CS%3aGO%20Lounge%20item%20price%20displayer&item_number=lounge%20item%20price%20displayer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest) - You want to buy me a beer or a cup of hot chocolate? Awesome! Thank you! :)
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=YE37DBVW7UBDE&lc=RO&item_name=Dota%202%20%26%20CS%3aGO%20Lounge%20item%20price%20displayer&item_number=lounge%20item%20price%20displayer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest)
+
+* [Steam Trade link](http://steamcommunity.com/tradeoffer/new/?partner=40940382&token=yltD_4U7) - Steam items/keys/sets/games/etc. anything is welcomed as a sign of your appreciation.
+[![Donate on Steam](https://i.imgur.com/C4RiaHy.png)](http://steamcommunity.com/tradeoffer/new/?partner=40940382&token=yltD_4U7)
 
 # Works with:
+
 * [www.dota2lounge.com](http://www.dota2lounge.com)
 * [www.csgolounge.com](http://www.csgolounge.com)
 
 # Features:
-* The item's price is displayed below its name, with extra information if the price is hovered.
 
-   ![Item price displayed under name - Dota2](http://i.imgur.com/tAZCMMO.png)
-   ![Item price displayed under name - CSGO](http://i.imgur.com/ASY5wzF.png)
+* The item's lowest price and price trend is displayed below its name, with extra information if the price is hovered.
+
+    ![Item price displayed under name - Dota2](https://i.imgur.com/Id89Vby.png)
+
+    ![Item price displayed under name - CSGO](https://i.imgur.com/NbbgYvS.png)
+    * Price trend shows the diference between the lowest price and the median price and it can be:
+        * Ascending (↗) if the lowest price is bigger than the median price
+
+            ![Price trend: Ascending (↗)](https://i.imgur.com/1S9XFtE.png)
+
+        * Stagnating (→) if the lowest price equals the median price
+
+            ![Price trend: Stagnating (→)](https://i.imgur.com/8vgmIoY.png)
+        * Descending (↘) if the lowest price is lower than the median price
+
+            ![Price trend: Descending (↘)](https://i.imgur.com/uf2hIHn.png)
+    * Price safety (the price's color) gets better with the more popular an item is (i.e. the more daily transactions the item has on the market) and it can be:
+        * Green: over 50 daily transaction
+
+            ![Price safety: Safe (Green)](https://i.imgur.com/To07UCU.png)
+        * Orange: less than 50 daily transactions
+
+            ![Price safety: Warning (Orange)](https://i.imgur.com/WYMFQmZ.png)
+        * Red: less than 10 daily transactions
+
+            ![Price safety: Unsafe (Red)](https://i.imgur.com/hoRGZwj.png)
 * "Not Marketable" is displayed for items that can not be sold on the Steam community market.
 
-   ![Not Marketable items are also displayed](http://i.imgur.com/r0AFm4q.png)
+    ![Not Marketable items are also displayed](https://i.imgur.com/vj31S8a.png)
 * A 'Refresh' button is added to re-fetch the latest price for the item from the Steam market.
 
-   ![Refresh price button available](http://i.imgur.com/8TumkIN.png)
+    ![Refresh price button available](https://i.imgur.com/qDOsOyj.png)
+* A currency selector that allows you to choose the currency for which you want to see prices displayed...
+
+    ![Currency selector in the top right of the page](https://i.imgur.com/rSSBJEN.png)
+    *  ...from the list of currencies supported by the Steam Market
+
+        ![List of available currencies](https://i.imgur.com/oBmAhp6.png)
+    * Your selected currency is remembered across page reloads
 * A popup with the selectable item's name is displayed if the item's name panel is clicked. This helps copy the item's name if needed.
 
-   ![Popup helper to copy an item's name](http://i.imgur.com/sFQXBgH.png)
+    ![Popup helper to copy an item's name](https://i.imgur.com/sFQXBgH.png)
 
 Please share your opinions, suggestions or bug reports.
 
@@ -32,7 +71,7 @@ Hope you like it ;)
 
 **Google Chrome:** You will need to install this script using the [Tampermonkey extension](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo). This way the script should be able to run nicely and you will also benefit from automatic updates when new version are available.
 
-**Firefox:** You will obviously need the [Greasemonkey addon](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) to be able to install and use this script. If you are using firefox 30+ you need to make sure you use Greasemonkey version 2.2+ or the script won't work.
+**Firefox:** You will obviously need the [Greasemonkey addon](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) to be able to install and use this script. If you are using Firefox 30+ you need to make sure you use Greasemonkey version 2.2+ or the script won't work.
 
 # Credits:
 
@@ -40,22 +79,35 @@ This script is initially inspired by the [Steam Market Price Matcher](http://use
 
 A special shout out to people that helped out so far:
 - [Reishid](http://steamcommunity.com/id/reishid) for his [great post](http://steamcommunity.com/groups/dota2lounge/discussions/0/648814396001808197/) on the D2L Steam Community forums
-- [Powsin (@lordpuza)](https://github.com/lordpuza) for giving out a helping hand with fixing the script
+- [Powsin (@lordpuza)](https://github.com/lordpuza) for giving out a helping hand with fixing the script when the lounge websites layout changed
 - [@joturako](https://github.com/joturako) for suggesting a better and clever way of retrieving prices from the Steam Market
 - [Enhanced Steam project](https://github.com/jshackles/Enhanced_Steam) for inspiration and reference on building a nice mapping of the available currencies on the Steam Market
 - &lt;Your name here&gt; for being awesome :)
 
-# Donations:
-
-If this script saved your life and you want to show your love and support to its developer for the work he did and will keep on doing, please consider offering a modest donation :)
-
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=YE37DBVW7UBDE&amp;lc=RO&amp;item_name=Dota%202%20%26%20CSGO%20Lounge%20item%20price%20displayer&amp;item_number=lounge%2ditem%2dprice%2ddisplayer&amp;currency_code=EUR&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
-
-If you can't use PayPal or if you prefer otherwise, here's my [Steam Trade link](http://steamcommunity.com/tradeoffer/new/?partner=40940382&token=yltD_4U7) where you can show your appreciation:
-
-[![Donate on Steam](http://i.imgur.com/C4RiaHy.png)](http://steamcommunity.com/tradeoffer/new/?partner=40940382&token=yltD_4U7)
-
 # Updates:
+
+**December, 6, 2014**
+
+Version 3.0! - Early Christmas present! :)
+
+* Addded the ability to select the currency you want to see prices displayed in
+  * Offering a currency selector and remember the choice across page reloads
+  * Refreshing all previously retrieved prices so they are now displayed in the new currency
+* Added a non-intrusive 'Donate' button at the end of the supported currencies list for generous people to find and use
+* Rewrote the way prices are retrieved and displayed:
+  * Lowest price (default)
+  * Median price (on price hover)
+  * Price trend (default) can be:
+    * Ascending (↗) if the lowest price is bigger than the median price
+    * Stagnating (→) if the lowest price equals the median price
+    * Descending (↘) if the lowest price is lower than the median price
+  * Daily transactions (on price hover): Number of transactions that were made in the past 24 hours period
+  * Price safety (the price's color)
+    * Red: less than 10 daily transactions
+    * Orange: less than 50 transactions
+    * Green: over 50 transaction
+  * This method should be much faster than the previous one because it uses a specialized JSON API instead of scraping the market listing page and extracting the value from there
+* Displaying an "Error" message instead of a missleading "Not Marketable" when the price can not be retrieved due to a network error or to Steam's servers going crazy
 
 **October 13, 2014**
 
@@ -95,6 +147,12 @@ Now also displaying item prices for items in your backpack that are displayed wh
 
 Initial release
 
-#Views counter:
-![counter powered by www.reliablecounter.com](http://www.reliablecounter.com/count.php?page=https://github.com/Enygma2002/d2l-price-displayer&digit=style/plain/5/&reloads=1)
-![](https://nojsstats.appspot.com/UA-50693946-4/github.com)
+# Mirrors / Alternate websites:
+
+This script was originally published on userscripts.org but since August 2014 the website is now dead. Thus, I have published this script on the main userscript communities that arose from userscripts.org's ashes:
+
+* [OpenUserJS.org](https://openuserjs.org/scripts/enygma/httpwww.enygma.ro/Dota_2_CSGO_Lounge_item_price_displayer)
+* [GreasyFork.org](https://greasyfork.org/scripts/666-dota-2-csgo-lounge-item-price-displayer)
+* [GitHub.com](https://github.com/Enygma2002/d2l-price-displayer)
+* [userscripts-mirror.org](http://userscripts-mirror.org:8080/scripts/show/182588) (outdated / old version, mirror of the original, listing here for historical reasons)
+* [userscripts.org](http://userscripts.org:8080/scripts/show/182588) (original link, dead, listing here for historical reasons)
