@@ -88,6 +88,10 @@ A special shout out to people that helped out so far:
 
 # Updates:
 
+**December, 7, 2014**
+
+* Fixed minor bugs that managed to slip my sight during testing :)
+
 **December, 6, 2014**
 
 Version 3.0! - Early Christmas present! :)

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Dota 2 & CSGO Lounge item price displayer
 // @namespace   http://www.enygma.ro
-// @version     3.0
+// @version     3.0.1
 // @author      Enygma
 // @description Displays an item's price information from the Steam Community Market and helps to copy an item's name.
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
@@ -173,7 +173,7 @@ var getItemElement = function(mouseEvent) {
     // It is now only present on csgolounge but we still want to support it in order to work with both sites.
     if (hasClass(targetElement, "item") && targetElement.querySelector(".name")) {
         // Hover the item display (contains image and rarity section)
-        itemElement = target;
+        itemElement = targetElement;
     } else if (hasClass(targetElement.parentNode, "item") && targetElement.parentNode.querySelector(".name")) {
         // Hover an individual item display's children (image or rarity section)
         itemElement = targetElement.parentNode;
