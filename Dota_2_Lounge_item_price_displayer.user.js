@@ -224,7 +224,9 @@ var attachExtraPanelAndListeners = function(itemElement) {
     extraPanel.setAttribute("class", "extraPanel");
 
     // ...and append it.
-    itemNamePanel.appendChild(extraPanel);
+    // Note: In case we are in the "My Trades" view, make sure to insert before the remove button.
+    var insertBeforeElement = itemNamePanel.querySelector("a.button");
+    itemNamePanel.insertBefore(extraPanel, insertBeforeElement);
     // Set click event handler for the item's name panel so that the item name can be copied to the clipboard easier.
     itemNamePanel.addEventListener("click", copyItemNameHandler, false);
     // Set click event handler for the refresh button that re-fetches the item's price.
