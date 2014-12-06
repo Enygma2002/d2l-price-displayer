@@ -434,7 +434,7 @@ if (appID == 570) {
     priceSafeColor = "green";
     priceWarningColor = "#C74411";
 }
-GM_addStyle(".currency a { color: white; font-weight: bold; margin-top: 0.2em; }");
+GM_addStyle(".currency a { color: white; font-weight: bold; margin-top: 0.25em; }");
 GM_addStyle(".priceSafe { color: " + priceSafeColor + " }");
 GM_addStyle(".priceWarning { color : " + priceWarningColor + " }");
 GM_addStyle(".priceUnsafe { color : red }");
