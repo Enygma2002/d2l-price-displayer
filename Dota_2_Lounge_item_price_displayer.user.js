@@ -1,18 +1,21 @@
 // ==UserScript==
-// @name        Dota 2 & CSGO Lounge item price displayer
-// @namespace   http://www.enygma.ro
-// @version     3.0.1
-// @author      Enygma
-// @description Displays an item's price information from the Steam Community Market and helps to copy an item's name.
-// @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @include     /^http(s)?://(www.)?dota2lounge.com//
-// @include     /^http(s)?://(www.)?csgolounge.com//
-// @updateURL   https://github.com/Enygma2002/d2l-price-displayer/raw/master/Dota_2_Lounge_item_price_displayer.user.js
-// @downloadURL https://github.com/Enygma2002/d2l-price-displayer/raw/master/Dota_2_Lounge_item_price_displayer.user.js
-// @grant       GM_xmlhttpRequest
-// @grant       GM_addStyle
-// @grant       GM_getValue
-// @grant       GM_setValue
+// @name               Dota 2 & CSGO Lounge item price displayer
+// @namespace          http://www.enygma.ro
+// @version            3.0.2
+// @author             Enygma
+// @description        Displays an item's price information from the Steam Community Market and helps to copy an item's name.
+// @license            GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
+// @include            /^http(s)?://(www.)?dota2lounge.com//
+// @include            /^http(s)?://(www.)?csgolounge.com//
+// @updateURL          https://github.com/Enygma2002/d2l-price-displayer/raw/master/Dota_2_Lounge_item_price_displayer.user.js
+// @downloadURL        https://github.com/Enygma2002/d2l-price-displayer/raw/master/Dota_2_Lounge_item_price_displayer.user.js
+// @supportURL         https://github.com/Enygma2002/d2l-price-displayer/issues
+// @contributionURL    https://github.com/Enygma2002/d2l-price-displayer#donations
+// @contributionAmount $5.00 / Game / Items
+// @grant              GM_xmlhttpRequest
+// @grant              GM_addStyle
+// @grant              GM_getValue
+// @grant              GM_setValue
 // ==/UserScript==
 
 // Determine on which site is the script being executed (dota2lounge or csgolounge)

@@ -15,6 +15,13 @@ This script is free and open source and it will stay that way. If you like it an
 
     [![Donate on Steam](https://i.imgur.com/C4RiaHy.png)](http://steamcommunity.com/tradeoffer/new/?partner=40940382&token=yltD_4U7)
 
+Humble thanks to these wonderful people that have donated so far:
+
+* [Reishid](http://steamcommunity.com/id/reishid) - game: "Contrast"
+* [Mangas](http://steamcommunity.com/profiles/76561197973489069) - dota2 items: 5 commons, 1 rare and 1 mythical
+* [&lt;&lt;MAx.__.harunO&gt;&gt;™](http://steamcommunity.com/id/MAxharunO) - dota2 item: 1 rare
+* &lt;Your name here&gt; - anything you consider this script is worth ;)
+
 # Works with:
 
 * [www.dota2lounge.com](http://www.dota2lounge.com)
@@ -87,6 +94,11 @@ A special shout out to people that helped out so far:
 - &lt;Your name here&gt; for being awesome :)
 
 # Updates:
+
+**December, 15, 2014**
+
+* Added list of people that have donated so far in the script's README
+* Added @supportURL and @contributionURL metadata to the script in order for people to easily get help
 
 **December, 7, 2014**
 
