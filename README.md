@@ -20,7 +20,10 @@ Humble thanks to these wonderful people that have donated so far:
 * [Reishid](http://steamcommunity.com/id/reishid) - game: "Contrast"
 * [Mangas](http://steamcommunity.com/profiles/76561197973489069) - dota2 items: 5 commons, 1 rare and 1 mythical
 * [&lt;&lt;MAx.__.harunO&gt;&gt;™](http://steamcommunity.com/id/MAxharunO) - dota2 item: 1 rare
+* Tuguldur Galbadrakh - 4 Euros
 * &lt;Your name here&gt; - anything you consider this script is worth ;)
+
+_Note: If, for any reason, you want your donation to remain anonymous, please let me know._
 
 # Works with:
 
