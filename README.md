@@ -21,6 +21,7 @@ Humble thanks to these wonderful people that have donated so far:
 * [Mangas](http://steamcommunity.com/profiles/76561197973489069) - dota2 items: 5 commons, 1 rare and 1 mythical
 * [&lt;&lt;MAx.__.harunO&gt;&gt;™](http://steamcommunity.com/id/MAxharunO) - dota2 item: 1 rare
 * Tuguldur Galbadrakh - 4 Euros
+* [@LeeTrojan ಠ_ಠ](http://steamcommunity.com/id/LeeTrojanDOTO) - dota2 items: 1 immortal and 1 rare
 * &lt;Your name here&gt; - anything you consider this script is worth ;)
 
 _Note: If, for any reason, you want your donation to remain anonymous, please let me know._
