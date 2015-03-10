@@ -22,6 +22,7 @@ Humble thanks to these wonderful people that have donated so far:
 * [&lt;&lt;MAx.__.harunO&gt;&gt;™](http://steamcommunity.com/id/MAxharunO) - dota2 item: 1 rare
 * Tuguldur Galbadrakh - 4 Euros
 * [@LeeTrojan ಠ_ಠ](http://steamcommunity.com/id/LeeTrojanDOTO) - dota2 items: 1 immortal and 1 rare
+* [Caotine](http://steamcommunity.com/profiles/76561198023810320) - csgo items: 4 skins and 3 cases
 * &lt;Your name here&gt; - anything you consider this script is worth ;)
 
 _Note: If, for any reason, you want your donation to remain anonymous, please let me know._
