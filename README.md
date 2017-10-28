@@ -178,6 +178,8 @@ This script was originally published on userscripts.org but since August 2014 th
 * [OpenUserJS.org](https://openuserjs.org/scripts/Enygma/Dota_2_CSGO_Lounge_item_price_displayer)
 * [GreasyFork.org](https://greasyfork.org/scripts/666-dota-2-csgo-lounge-item-price-displayer)
 * [GitHub.com](https://github.com/Enygma2002/d2l-price-displayer)
-* [MonkeyGuts.com](https://monkeyguts.com/code.php?id=653)
-* [userscripts-mirror.org](http://userscripts-mirror.org:8080/scripts/show/182588) (outdated / old version, mirror of the original, listing here for historical reasons)
-* [userscripts.org](http://userscripts.org:8080/scripts/show/182588) (original link, dead, listing here for historical reasons)
+
+Dead or outdated links (listed for historical reasons):
+* [userscripts-mirror.org](http://userscripts-mirror.org/scripts/show/182588) (outdated / old version, mirror of the original)
+* [userscripts.org](http://userscripts.org:8080/scripts/show/182588) (original link, dead. Installed 5257 times)
+* [MonkeyGuts.com](https://monkeyguts.com/code.php?id=653) (dead since ~ july 2015. Installed 142 times)
