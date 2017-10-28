@@ -175,7 +175,7 @@ Initial release
 
 This script was originally published on userscripts.org but since August 2014 the website is now dead. Thus, I have published this script on the main userscript communities that arose from userscripts.org's ashes:
 
-* [OpenUserJS.org](https://openuserjs.org/scripts/enygma/httpwww.enygma.ro/Dota_2_CSGO_Lounge_item_price_displayer)
+* [OpenUserJS.org](https://openuserjs.org/scripts/Enygma/Dota_2_CSGO_Lounge_item_price_displayer)
 * [GreasyFork.org](https://greasyfork.org/scripts/666-dota-2-csgo-lounge-item-price-displayer)
 * [GitHub.com](https://github.com/Enygma2002/d2l-price-displayer)
 * [MonkeyGuts.com](https://monkeyguts.com/code.php?id=653)
